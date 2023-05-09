@@ -1,6 +1,7 @@
 const database = require("./database");
 
 //requetes sur les movies
+// requete globale sur les films
 const getMovies = (req, res) => {
   database
     .query("select * from movies")
@@ -13,6 +14,7 @@ const getMovies = (req, res) => {
     });
 };
 
+//requete par Id des films
 const getMovieById = (req, res) => {
   
   const id = parseInt(req.params.id);
@@ -31,7 +33,10 @@ const getMovieById = (req, res) => {
       res.status(500).send("Error retrieving data from database");
     });
 };
+
 // requetes sur les users
+
+//requete globale des users
 const getUsers = (req, res) => {
   database
     .query("select * from users")
@@ -44,6 +49,7 @@ const getUsers = (req, res) => {
     });
 };
 
+//requete par Id
 const getUserById = (req, res) => {
 
   const id = parseInt(req.params.id);
