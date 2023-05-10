@@ -34,3 +34,5 @@ app.post("/api/movies", movieHandlers.postMovie);
 app.post("/api/users", movieHandlers.postUser); //challenge quete express 03
 app.put("/api/movies/:id", movieHandlers.updateMovie);
 app.put("/api/users/:id", movieHandlers.updateUser);//challenge quete express 04
+app.delete("/api/movies/:id", movieHandlers.deleteMovie);
+app.delete("/api/users/:id", movieHandlers.deleteUser);//challenge express 05

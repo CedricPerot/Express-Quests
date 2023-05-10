@@ -147,4 +147,41 @@ const updateUser = (req, res) => {
     });
 };
 
-module.exports = { getMovies, getMovieById, getUsers, getUserById, postMovie, postUser, updateMovie,updateUser };
+const deleteMovie = (req, res) => {
+  const id = parseInt(req.params.id);
+
+  database
+    .query("delete from movies where id = ?", [id])
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error deleting the movie");
+    });
+};
+//challenge express 05
+const deleteUser = (req, res) => {
+  const id = parseInt(req.params.id);
+
+  database
+    .query("delete from users where id = ?", [id])
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error deleting the movie");
+    });
+};
+
+
+module.exports = { getMovies, getMovieById, getUsers, getUserById, postMovie, postUser, updateMovie,updateUser, deleteMovie, deleteUser };
