@@ -35,16 +35,16 @@ const getUsers = (req, res) => {
   let sql = "select * from users";
   const sqlValues = [];
 
-  if (req.query.color != null) {
+  if (req.query.city != null) {
     sql += " where city = ?";
     sqlValues.push(req.query.city);
   
 
-  if (req.query.max_duration != null) {
+  if (req.query.language != null) {
     sql += " where language = ?";
     sqlValues.push(req.query.language);
   }
-  } else if (req.query.max_duration != null) {
+  } else if (req.query.language != null) {
     sql += " where language = ?";
     sqlValues.push(req.query.language);
     }
