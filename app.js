@@ -32,3 +32,5 @@ app.listen(port, (err) => {
 
 app.post("/api/movies", movieHandlers.postMovie);
 app.post("/api/users", movieHandlers.postUser); //challenge quete express 03
+app.put("/api/movies/:id", movieHandlers.updateMovie);
+app.put("/api/users/:id", movieHandlers.updateUser);//challenge quete express 04
