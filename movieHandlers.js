@@ -1,10 +1,27 @@
 const database = require("./database");
 
 //requetes sur les movies
-// requete globale sur les films
+// requete globale sur les films quet express 06
 const getMovies = (req, res) => {
+  let sql = "select * from movies";
+  const sqlValues = [];
+
+  if (req.query.color != null) {
+    sql += " where color = ?";
+    sqlValues.push(req.query.color);
+  
+
+  if (req.query.max_duration != null) {
+    sql += " where duration <= ?";
+    sqlValues.push(req.query.max_duration);
+  }
+  } else if (req.query.max_duration != null) {
+    sql += " where duration <= ?";
+    sqlValues.push(req.query.max_duration);
+    }
+
   database
-    .query("select * from movies")
+    .query(sql, sqlValues)
     .then(([movies]) => {
       res.status(200).json(movies);
     })
@@ -13,6 +30,36 @@ const getMovies = (req, res) => {
       res.status(500).send("Error retrieving data from database");
     });
 };
+//version challenge Express 06
+const getUsers = (req, res) => {
+  let sql = "select * from users";
+  const sqlValues = [];
+
+  if (req.query.color != null) {
+    sql += " where city = ?";
+    sqlValues.push(req.query.city);
+  
+
+  if (req.query.max_duration != null) {
+    sql += " where language = ?";
+    sqlValues.push(req.query.language);
+  }
+  } else if (req.query.max_duration != null) {
+    sql += " where language = ?";
+    sqlValues.push(req.query.language);
+    }
+
+  database
+    .query(sql, sqlValues)
+    .then(([users]) => {
+      res.status(200).json(users);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error retrieving data from database");
+    });
+};
+
 
 //requete par Id des films
 const getMovieById = (req, res) => {
@@ -23,7 +70,7 @@ const getMovieById = (req, res) => {
   .query("select * from movies where id = ?", [id])
   .then(([movies]) => {
     if (movies[0] != null) {
-      res.json(movies[0]);
+      res.status(200).json(movies[0]);
       } else {
         res.status(404).send("Not Found");
       }
@@ -36,18 +83,18 @@ const getMovieById = (req, res) => {
 
 // requetes sur les users
 
-//requete globale des users
-const getUsers = (req, res) => {
-  database
-    .query("select * from users")
-    .then(([users]) => {
-      res.status(200).json(users);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error retrieving data from database");
-    });
-};
+// //requete globale des users
+// const getUsers = (req, res) => {
+//   database
+//     .query("select * from users")
+//     .then(([users]) => {
+//       res.status(200).json(users);
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//       res.status(500).send("Error retrieving data from database");
+//     });
+// };
 
 //requete par Id
 const getUserById = (req, res) => {
